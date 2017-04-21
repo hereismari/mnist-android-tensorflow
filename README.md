@@ -42,6 +42,8 @@ A full example can be seen [here](https://github.com/mari-linhares/mnist-android
 
 ## How to run my model with Android?
 
+You need two things:
+
 1. [The TensorFlow jar](https://github.com/MindorksOpenSource/AndroidTensorFlowMNISTExample/blob/master/app/libs/libandroid_tensorflow_inference_java.jar) 
    Move it to the libs folder, right click and add as library.
 2. The TensorFlow so file for the desired architecture:  

@@ -17,7 +17,7 @@ import org.tensorflow.contrib.android.TensorFlowInferenceInterface;
 
 public class Classifier {
 
-    // Only if at least this confidence
+    // Only returns if at least this confidence
     private static final float THRESHOLD = 0.1f;
 
     private TensorFlowInferenceInterface tfHelper;
