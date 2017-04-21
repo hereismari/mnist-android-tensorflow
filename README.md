@@ -3,7 +3,7 @@
 Check the video demo [here](https://www.youtube.com/watch?v=gahi0Hjgokw)
 
 ![Image](images/demo.png)
-Beaultiful edition, I know.  
+Beautiful edition, I know.  
 
 Handwritten digits classification from MNIST on Android with TensorFlow.  
 
