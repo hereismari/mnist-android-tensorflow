@@ -3,6 +3,7 @@
 Check the video demo [here](https://www.youtube.com/watch?v=gahi0Hjgokw)
 
 ![Image](images/demo.png)
+Beaultiful edition, I know.  
 
 Handwritten digits classification from MNIST on Android with TensorFlow.  
 
@@ -42,13 +43,13 @@ A full example can be seen [here](https://github.com/mari-linhares/mnist-android
 ## How to run my model with Android?
 
 1. [The TensorFlow jar](https://github.com/MindorksOpenSource/AndroidTensorFlowMNISTExample/blob/master/app/libs/libandroid_tensorflow_inference_java.jar) 
-   Move it to the libs folder, and right click and choose ...
+   Move it to the libs folder, right click and add as library.
 2. The TensorFlow so file for the desired architecture:  
 [x86](https://github.com/cesardelgadof/TensorFlowAndroidMNIST/blob/master/app/src/main/jniLibs/x86/libtensorflow_mnist.so)  
 [armeabi-v7a](https://github.com/MindorksOpenSource/AndroidTensorFlowMNISTExample/tree/master/app/src/main/jniLibs/armeabi-v7a)  
 Move it to app/src/main/jniLibs/x86/libtensorflow_inference.so or app/src/jniLibs/armeabi-v7a/libtensorflow_inference.so
 
-If you want to generate these files yourself, [here](https://blog.mindorks.com/creating-custom-model-for-android-using-tensorflow-3f963d270bfb) is a nice tutorial of how to do it.
+If you want to generate these files yourself, [here](https://blog.mindorks.com/android-tensorflow-machine-learning-example-ff0e9b2654cc) is a nice tutorial of how to do it.
 
 ## Interacting with TensorFlow
 
