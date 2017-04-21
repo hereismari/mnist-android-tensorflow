@@ -1,58 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFCCCCCC"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
     android:orientation="vertical"
-    tools:context=".MainActivity">
+    tools:context="mariannelinhares.mnistandroid.MainActivity">
 
-        <mariannelinhares.mnistandroid.DrawingView
-            android:id="@+id/drawing"
-            android:layout_height="560px"
-            android:layout_width="560px"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"
-            android:background="#FFFFFFFF"
-            />
+    <mariannelinhares.mnistandroid.views.DrawView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:id="@+id/draw"
+        android:layout_weight="1"/>
 
-    <!-- Bottom Row -->
     <LinearLayout
-        android:layout_width="356dp"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
         android:orientation="horizontal"
-        android:layout_weight="0.31">
+        android:layout_height="100dp">
 
         <Button
-            android:id="@+id/btn_clear"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="7dp"
-            android:layout_marginStart="7dp"
             android:text="Clear"
-            tools:layout_editor_absoluteX="16dp"
-            tools:layout_editor_absoluteY="403dp" />
+            android:id="@+id/btn_clear"/>
 
         <Button
-            android:id="@+id/btn_class"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="26dp"
-            android:layout_marginStart="26dp"
-            android:text="Classify"
-            tools:layout_editor_absoluteX="114dp"
-            tools:layout_editor_absoluteY="403dp" />
+            android:text="Detect"
+            android:id="@+id/btn_class"/>
 
         <TextView
             android:id="@+id/tfRes"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="34dp"
-            android:layout_marginStart="34dp"
-            android:text="Result: "
-            tools:layout_editor_absoluteX="236dp"
-            tools:layout_editor_absoluteY="403dp" />
+            android:layout_weight="1"
+            android:paddingLeft="10dp"
+            android:text="Result:"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
     </LinearLayout>
 
 </LinearLayout>
