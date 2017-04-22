@@ -21,7 +21,7 @@ If you have no ideia what I just said above, have a look on the instructions bel
 ## How to run this?
 
 Just open this project with Android Studio and is ready to run, this will work
-with 86x and armeabi-v7a architectures.
+with x86 and armeabi-v7a architectures.
 
 ## How to export my model?
 
@@ -44,11 +44,14 @@ A full example can be seen [here](https://github.com/mari-linhares/mnist-android
 
 You need two things:
 
-1. [The TensorFlow jar](https://github.com/MindorksOpenSource/AndroidTensorFlowMNISTExample/blob/master/app/libs/libandroid_tensorflow_inference_java.jar) 
-   Move it to the libs folder, right click and add as library.
+1. [The TensorFlow jar](https://github.com/MindorksOpenSource/AndroidTensorFlowMNISTExample/blob/master/app/libs/libandroid_tensorflow_inference_java.jar)  
+   Move it to the libs folder, right click and add as library.  
+
 2. The TensorFlow so file for the desired architecture:  
 [x86](https://github.com/cesardelgadof/TensorFlowAndroidMNIST/blob/master/app/src/main/jniLibs/x86/libtensorflow_mnist.so)  
 [armeabi-v7a](https://github.com/MindorksOpenSource/AndroidTensorFlowMNISTExample/tree/master/app/src/main/jniLibs/armeabi-v7a)  
+
+Creat the jniLibs/x86 folder or the jniLibs/armeabi-v7a folder at the main folder.  
 Move it to app/src/main/jniLibs/x86/libtensorflow_inference.so or app/src/jniLibs/armeabi-v7a/libtensorflow_inference.so
 
 If you want to generate these files yourself, [here](https://blog.mindorks.com/android-tensorflow-machine-learning-example-ff0e9b2654cc) is a nice tutorial of how to do it.
