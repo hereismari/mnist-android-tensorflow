@@ -45,7 +45,7 @@ public class Classifier {
     }
 
 
-    static public Classifier create(AssetManager assetManager, String modelPath, String labelPath,
+    static public Classifier create(AssetManager assetManager, String modelPath, String labelFile,
                              int inputSize, String inputName, String outputName)
                              throws IOException {
 
@@ -54,15 +54,9 @@ public class Classifier {
         c.inputName = inputName;
         c.outputName = outputName;
 
-        // Read labels
-        String labelFile = labelPath.split("file:///android_asset/")[1];
         c.labels = readLabels(c, assetManager, labelFile);
 
-        c.tfHelper = new TensorFlowInferenceInterface();
-        if (c.tfHelper.initializeTensorFlow(assetManager, modelPath) != 0) {
-            throw new RuntimeException("TF initialization failed");
-        }
-
+        c.tfHelper = new TensorFlowInferenceInterface(assetManager, modelPath);
         int numClasses = 10;
 
         c.inputSize = inputSize;
@@ -78,10 +72,10 @@ public class Classifier {
 
     public Classification recognize(final float[] pixels) {
 
-        tfHelper.fillNodeFloat(inputName, new int[]{inputSize * inputSize}, pixels);
-        tfHelper.runInference(outputNames);
+        tfHelper.feed(inputName, pixels, 1, inputSize, inputSize, 1);
+        tfHelper.run(outputNames);
 
-        tfHelper.readNodeFloat(outputName, output);
+        tfHelper.fetch(outputName, output);
 
         // Find the best classification
         Classification ans = new Classification();

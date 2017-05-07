@@ -15,7 +15,9 @@ package mariannelinhares.mnistandroid;
    See the License for the specific language governing permissions and
    limitations under the License.
 
-   From: https://raw.githubusercontent.com/miyosuda/TensorFlowAndroidMNIST/master/app/src/main/java/jp/narr/tensorflowmnist/DrawModel.java
+   From: https://raw.githubusercontent
+   .com/miyosuda/TensorFlowAndroidMNIST/master/app/src/main/java/jp/narr/tensorflowmnist
+   /DrawModel.java
 */
 
 import android.app.Activity;
@@ -25,41 +27,33 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-
-import java.util.concurrent.Executor;
-import java.util.concurrent.Executors;
-
 import mariannelinhares.mnistandroid.views.DrawModel;
 import mariannelinhares.mnistandroid.views.DrawView;
 
 /**
  * Changed by marianne-linhares on 21/04/17.
- * https://raw.githubusercontent.com/miyosuda/TensorFlowAndroidMNIST/master/app/src/main/java/jp/narr/tensorflowmnist/DrawModel.java
+ * https://raw.githubusercontent.com/miyosuda/TensorFlowAndroidMNIST/master/app/src/main/java/jp
+ * /narr/tensorflowmnist/DrawModel.java
  */
 
 public class MainActivity extends Activity implements View.OnClickListener, View.OnTouchListener {
-
-    // ui related
-    private Button clearBtn, classBtn;
-    private TextView resText;
 
     // tensorflow input and output
     private static final int INPUT_SIZE = 28;
     private static final String INPUT_NAME = "input";
     private static final String OUTPUT_NAME = "output";
+    private static final String MODEL_FILE = "expert-graph.pb";
+    private static final String LABEL_FILE = "labels.txt";
+    private static final int PIXEL_WIDTH = 28;
 
-    private static final String MODEL_FILE = "file:///android_asset/expert-graph.pb";
-    private static final String LABEL_FILE = "file:///android_asset/labels.txt";
-
+    // ui related
+    private Button clearBtn, classBtn;
+    private TextView resText;
     private Classifier classifier;
-
-    private Executor executor = Executors.newSingleThreadExecutor();
 
     // views related
     private DrawModel drawModel;
     private DrawView drawView;
-    private static final int PIXEL_WIDTH = 28;
-
     private PointF mTmpPiont = new PointF();
 
     private float mLastX;
@@ -71,70 +65,25 @@ public class MainActivity extends Activity implements View.OnClickListener, View
         setContentView(R.layout.activity_main);
 
         //get drawing view
-        drawView = (DrawView)findViewById(R.id.draw);
+        drawView = (DrawView) findViewById(R.id.draw);
         drawModel = new DrawModel(PIXEL_WIDTH, PIXEL_WIDTH);
 
         drawView.setModel(drawModel);
         drawView.setOnTouchListener(this);
 
         //clear button
-        clearBtn = (Button)findViewById(R.id.btn_clear);
+        clearBtn = (Button) findViewById(R.id.btn_clear);
         clearBtn.setOnClickListener(this);
 
         //class button
-        classBtn = (Button)findViewById(R.id.btn_class);
+        classBtn = (Button) findViewById(R.id.btn_class);
         classBtn.setOnClickListener(this);
 
         // res text
-        resText = (TextView)findViewById(R.id.tfRes);
+        resText = (TextView) findViewById(R.id.tfRes);
 
         // tensorflow
         loadModel();
-    }
-
-    private void loadModel() {
-        executor.execute(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    classifier = Classifier.create(getApplicationContext().getAssets(),
-                                                   MODEL_FILE,
-                                                   LABEL_FILE,
-                                                   INPUT_SIZE,
-                                                   INPUT_NAME,
-                                                   OUTPUT_NAME);
-                } catch (final Exception e) {
-                    throw new RuntimeException("Error initializing TensorFlow!", e);
-                }
-            }
-        });
-    }
-
-    @Override
-    public void onClick(View view){
-
-        if(view.getId() == R.id.btn_clear) {
-            drawModel.clear();
-            drawView.reset();
-            drawView.invalidate();
-
-            resText.setText("Result: ");
-        }
-        else if(view.getId() == R.id.btn_class){
-
-            float pixels[] = drawView.getPixelData();
-
-            final Classification res = classifier.recognize(pixels);
-            String result = "Result: ";
-            if (res.getLabel() == null) {
-                resText.setText(result + "?");
-            }
-            else {
-                result += res.getLabel();
-                result += "\nwith probability: " + res.getConf();
-                resText.setText(result);
-            }
-        }
     }
 
     @Override
@@ -149,6 +98,46 @@ public class MainActivity extends Activity implements View.OnClickListener, View
         super.onPause();
     }
 
+    private void loadModel() {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    classifier = Classifier.create(getApplicationContext().getAssets(),
+                            MODEL_FILE,
+                            LABEL_FILE,
+                            INPUT_SIZE,
+                            INPUT_NAME,
+                            OUTPUT_NAME);
+                } catch (final Exception e) {
+                    throw new RuntimeException("Error initializing TensorFlow!", e);
+                }
+            }
+        }).start();
+    }
+
+    @Override
+    public void onClick(View view) {
+        if (view.getId() == R.id.btn_clear) {
+            drawModel.clear();
+            drawView.reset();
+            drawView.invalidate();
+
+            resText.setText("Result: ");
+        } else if (view.getId() == R.id.btn_class) {
+            float pixels[] = drawView.getPixelData();
+
+            final Classification res = classifier.recognize(pixels);
+            String result = "Result: ";
+            if (res.getLabel() == null) {
+                resText.setText(result + "?");
+            } else {
+                result += res.getLabel();
+                result += "\nwith probability: " + res.getConf();
+                resText.setText(result);
+            }
+        }
+    }
 
     @Override
     public boolean onTouch(View v, MotionEvent event) {
@@ -157,11 +146,9 @@ public class MainActivity extends Activity implements View.OnClickListener, View
         if (action == MotionEvent.ACTION_DOWN) {
             processTouchDown(event);
             return true;
-
         } else if (action == MotionEvent.ACTION_MOVE) {
             processTouchMove(event);
             return true;
-
         } else if (action == MotionEvent.ACTION_UP) {
             processTouchUp();
             return true;
