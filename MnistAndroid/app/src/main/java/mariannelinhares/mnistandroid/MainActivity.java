@@ -42,7 +42,7 @@ public class MainActivity extends Activity implements View.OnClickListener, View
     private static final int INPUT_SIZE = 28;
     private static final String INPUT_NAME = "input";
     private static final String OUTPUT_NAME = "output";
-    private static final String MODEL_FILE = "optimized_mnist_convnet.pb";
+    private static final String MODEL_FILE = "opt_mnist_convnet.pb";
     private static final String LABEL_FILE = "labels.txt";
     private static final int PIXEL_WIDTH = 28;
 
