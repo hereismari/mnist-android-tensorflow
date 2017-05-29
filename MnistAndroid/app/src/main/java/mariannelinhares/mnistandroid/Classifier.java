@@ -73,6 +73,7 @@ public class Classifier {
     public Classification recognize(final float[] pixels) {
 
         tfHelper.feed(inputName, pixels, 1, inputSize, inputSize, 1);
+        tfHelper.feed("keep_prob", new float[] {1.0f});
         tfHelper.run(outputNames);
 
         tfHelper.fetch(outputName, output);
