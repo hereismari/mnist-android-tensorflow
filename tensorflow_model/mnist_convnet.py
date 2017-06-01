@@ -74,7 +74,7 @@ def train(x, keep_prob, y_, train_step, loss, accuracy,
         sess.run(init_op)
 
         tf.train.write_graph(sess.graph_def, 'out',
-            MODEL_NAME + '.graph.bin', False)
+            MODEL_NAME + '.pbtxt', True)
 
         # op to write logs to Tensorboard
         summary_writer = tf.summary.FileWriter('logs/',
@@ -90,7 +90,7 @@ def train(x, keep_prob, y_, train_step, loss, accuracy,
                 feed_dict={x: batch[0], y_: batch[1], keep_prob: 0.5})
             summary_writer.add_summary(summary, step)
 
-        saver.save(sess, 'out/' + MODEL_NAME + '.ckpt')
+        saver.save(sess, 'out/' + MODEL_NAME + '.chkp')
 
         test_accuracy = accuracy.eval(feed_dict={x: mnist.test.images,
                                     y_: mnist.test.labels,
@@ -100,8 +100,8 @@ def train(x, keep_prob, y_, train_step, loss, accuracy,
     print("training finished!")
 
 def export_model(input_node_names, output_node_name):
-    freeze_graph.freeze_graph('out/' + MODEL_NAME + '.graph.bin', None, True,
-        'out/' + MODEL_NAME + '.ckpt', output_node_name, "save/restore_all",
+    freeze_graph.freeze_graph('out/' + MODEL_NAME + '.pbtxt', None, False,
+        'out/' + MODEL_NAME + '.chkp', output_node_name, "save/restore_all",
         "save/Const:0", 'out/frozen_' + MODEL_NAME + '.pb', True, "")
 
     input_graph_def = tf.GraphDef()
@@ -112,8 +112,8 @@ def export_model(input_node_names, output_node_name):
             input_graph_def, input_node_names, [output_node_name],
             tf.float32.as_datatype_enum)
 
-    f = tf.gfile.FastGFile('out/opt_' + MODEL_NAME + '.pb', "wb")
-    f.write(output_graph_def.SerializeToString())
+    with tf.gfile.FastGFile('out/opt_' + MODEL_NAME + '.pb', "wb") as f:
+        f.write(output_graph_def.SerializeToString())
 
     print("graph saved!")
 
