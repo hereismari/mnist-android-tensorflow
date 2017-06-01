@@ -1,0 +1,4 @@
+tensorflow_model/logs/
+tensorflow_model/MNIST_data/
+tensorflow_model/out/
+
