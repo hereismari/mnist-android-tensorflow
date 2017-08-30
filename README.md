@@ -1,6 +1,6 @@
 # MNIST on Android with TensorFlow
 
-Check the video demo [here](https://www.youtube.com/watch?v=gahi0Hjgokw)
+Check the video demo [here](https://www.youtube.com/watch?v=gahi0Hjgokw).
 
 ![Image](images/demo.png)
 Beautiful edition, I know.  
@@ -9,14 +9,12 @@ Handwritten digits classification from MNIST on Android with TensorFlow.
 
 If you want to make your own version of this app or want to know
 how to save your model and export it for Android or other devices check the
-very simple tutorial bellow.  
+very simple tutorial below.  
 
 The UI and expert-graph.pb model were taken from: https://github.com/miyosuda/TensorFlowAndroidMNIST, so thank you miyousuda.  
 The TensorFlow jar and so armeabi-v7a were taken from: https://github.com/MindorksOpenSource/AndroidTensorFlowMNISTExample,
 so thank you MindorksOpenSource.  
 The Tensorflow so of x86 was taken from: https://github.com/cesardelgadof/TensorFlowAndroidMNIST, so thank you cesardelgadof.  
-
-If you have no ideia what I just said above, have a look on the instructions bellow.
 
 ## How to run this?
 
@@ -42,7 +40,7 @@ A full example can be seen [here](https://github.com/mari-linhares/mnist-android
 
 ## How to run my model with Android?
 
-You need two things:
+You basically need two things:
 
 1. [The TensorFlow jar](https://github.com/MindorksOpenSource/AndroidTensorFlowMNISTExample/blob/master/app/libs/libandroid_tensorflow_inference_java.jar)  
    Move it to the libs folder, right click and add as library.  
