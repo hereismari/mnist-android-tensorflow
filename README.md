@@ -1,5 +1,9 @@
 # MNIST on Android with TensorFlow
 
+
+This work was featured on a [video from Siraj Raval!](https://www.youtube.com/watch?v=kFWKdLOxykE&t=67s)  
+![](https://img.youtube.com/vi/kFWKdLOxykE/hqdefault.jpg)
+
 Check the video demo [here](https://www.youtube.com/watch?v=gahi0Hjgokw).
 
 ![Image](images/demo.png)
