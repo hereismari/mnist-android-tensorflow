@@ -7,7 +7,7 @@ This work was featured on a [video from Siraj Raval!](https://www.youtube.com/wa
 Check the video demo [here](https://www.youtube.com/watch?v=gahi0Hjgokw).
 
 ![Image](images/demo.png)
-Beautiful edition, I know.  
+Beautiful art work, right? I know.  
 
 Handwritten digits classification from MNIST on Android with TensorFlow.  
 
